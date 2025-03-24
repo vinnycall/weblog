@@ -1,0 +1,29 @@
+Database tables
+
+Users
+	id
+	name
+	password
+	email
+	email verified
+	datecreated
+	haspremium(1=yes; 2=no;)
+
+
+articles
+	id
+	user_id (foreign)
+	name (title)
+	body
+	datecreated
+	
+categories
+	lifestyle
+	tech
+	funny
+	etc.
+
+email sub list
+	id
+	user_id
+	user_email

@@ -1,0 +1,47 @@
+weblog
+-> homepage
+	->header
+		->logo
+		->title
+		->navbar
+		->search button
+
+	-> featured articles (most popular???)
+	-> subscribe to emails
+	-> adspace?
+	-> adfree (premium)
+	-> categories
+
+	-> footer
+		->about
+		->contact
+		->ads
+		->privacy
+		->social handles
+-> navbar
+	->home
+		
+
+	->articles
+		->articles page
+			-> articles
+				-> categories
+				-> Random article (premium)
+			-> creators
+				-> clickable to see creator page
+				-> subscribe to creator (premium)
+			-
+	
+	->create article
+	->log in	
+	->premium
+	->contact
+	->socials handles
+-> pages:
+	home
+	articles
+	create article
+	premium
+	privacy
+	socials
+	login

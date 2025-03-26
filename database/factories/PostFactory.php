@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\posts>
  */
-class PostsFactory extends Factory
+class PostFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -23,8 +23,3 @@ class PostsFactory extends Factory
         ];
     }
 }
-/* Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->text("body")->nullable();
-            $table->timestamps();*/

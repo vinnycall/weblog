@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Article>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\posts>
  */
-class ArticleFactory extends Factory
+class PostsFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -23,7 +23,7 @@ class ArticleFactory extends Factory
         ];
     }
 }
-/* Schema::create('articles', function (Blueprint $table) {
+/* Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text("body")->nullable();

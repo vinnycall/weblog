@@ -1,119 +1,26 @@
-// window.onscroll = function() {
-//     var navbarContainer = document.querySelector('.navbar-container');
-//     // var navbar = document.querySelector('.navbar');
-    
-//     if (window.pageYOffset > 100) {  
-        
-//         // navbar.classList.add('sticky-left');
-//         navbarContainer.classList.add('sticky-left');
-//     } else {
-        
-//         // navbar.classList.remove('sticky-left');
-//         navbarContainer.classList.remove('sticky-left');
-//     }
-// };
 
+let lastScrollTop = 0; // Variable to track last scroll position
+let isTransitioning = false; // To prevent multiple transitions at once
 
-// window.onscroll = function() {
-//     var navbarContainer = document.querySelector('.navbar-container');
-//     var navbar = document.querySelector('.navbar');
-//     var loginButton = document.querySelector('.loginButton');
-
-//     if (window.pageYOffset > 50 && !navbarContainer.classList.contains('sidebar')) {  
-//         navbarContainer.classList.add('sticky-left');
-//         navbar.classList.add('sticky-left');
-//         loginButton.classList.add('sticky-left');
-
-//         // Wait for collapse animation to finish, then expand sidebar
-//         setTimeout(() => {
-//             navbarContainer.classList.add('sidebar');
-//         }, 500);
-
-//     } else if (window.pageYOffset <= 50 && navbarContainer.classList.contains('sidebar')) {
-//         navbarContainer.classList.remove('sidebar');
-
-//         // Wait for sidebar to shrink, then restore navbar
-//         setTimeout(() => {
-//             navbarContainer.classList.remove('sticky-left');
-//             navbar.classList.remove('sticky-left');
-//             loginButton.classList.remove('sticky-left');
-//         }, 500);
-//     }
-// };
-
-// window.onscroll = function() {
-//     var navbarContainer = document.querySelector('.navbar-container');
-//     var navbar = document.querySelector('.navbar');
-//     var loginButton = document.querySelector('.loginButton');
-
-//     if (window.pageYOffset > 50) {  
-//         navbarContainer.classList.add('sticky-left', 'sidebar');
-//         navbar.classList.add('sticky-left');
-//         loginButton.classList.add('sticky-left');
-//     } else {
-//         navbarContainer.classList.remove('sticky-left', 'sidebar');
-//         navbar.classList.remove('sticky-left');
-//         loginButton.classList.remove('sticky-left');
-//     }
-// };
-// window.onscroll = function() {
-//     var navbarContainer = document.querySelector('.navbar-container');
-//     var navbar = document.querySelector('.navbar');
-//     var loginButton = document.querySelector('.loginButton');
-
-//     if (window.pageYOffset > 50 && !navbarContainer.classList.contains('sidebar')) {  
-//         navbarContainer.classList.add('sticky-left');
-
-//         // Wait for horizontal collapse to finish, then expand vertically
-//         setTimeout(() => {
-//             navbarContainer.classList.add('sidebar');
-//         }, 400);
-
-//     } else if (window.pageYOffset <= 50 && navbarContainer.classList.contains('sidebar')) {
-//         navbarContainer.classList.remove('sidebar');
-
-//         // Wait for vertical collapse to finish, then expand horizontally
-//         setTimeout(() => {
-//             navbarContainer.classList.remove('sticky-left');
-//         }, 400);
-//     }
-// };
-// window.onscroll = function() {
-//     var navbarContainer = document.querySelector('.navbar-container');
-//     var navbar = document.querySelector('.navbar');
-//     var loginButton = document.querySelector('.loginButton');
-
-//     if (window.pageYOffset > 50 && !navbarContainer.classList.contains('sidebar')) {  
-//         navbarContainer.classList.add('sticky-left');
-//         navbar.classList.add('sticky-left');
-//         loginButton.classList.add('sticky-left');
-
-//         // Wait for horizontal collapse to finish, then expand downward
-//         setTimeout(() => {
-//             navbarContainer.classList.add('sidebar');
-//         }, 400);
-
-//     } else if (window.pageYOffset <= 50 && navbarContainer.classList.contains('sidebar')) {
-//         navbarContainer.classList.remove('sidebar');
-
-//         // Wait for vertical collapse to finish, then expand back
-//         setTimeout(() => {
-//             navbarContainer.classList.remove('sticky-left');
-//             navbar.classList.remove('sticky-left');
-//             loginButton.classList.remove('sticky-left');
-//         }, 400);
-//     }
-// };
 window.onscroll = function() {
     var navbarContainer = document.querySelector('.navbar-container');
     var navbar = document.querySelector('.navbar');
     var loginButton = document.querySelector('.loginButton');
+    var registerButton = document.querySelector('.registerButton');
     var navbarList = document.querySelector('.navbar ul');
+    var topButton = document.querySelector('.top-button');
+    
+    var currentScrollTop = window.pageYOffset;
 
-    if (window.pageYOffset > 50 && !navbarContainer.classList.contains('sidebar')) {  
+    // Check if scrolling down or up
+    if (currentScrollTop > lastScrollTop && !isTransitioning && window.pageYOffset > 50 && !navbarContainer.classList.contains('sidebar')) {
+        // Scroll down
+        isTransitioning = true; // Start transition
+
         navbarContainer.classList.add('sticky-left');
         navbar.classList.add('sticky-left');
         loginButton.classList.add('sticky-left');
+        registerButton.classList.add('sticky-left');
 
         // Hide text immediately
         navbarList.style.visibility = 'hidden';
@@ -122,20 +29,48 @@ window.onscroll = function() {
         setTimeout(() => {
             navbarContainer.classList.add('sidebar');
             navbarList.style.visibility = 'visible'; // Reappear smoothly
+            topButton.style.display = 'flex';
+            isTransitioning = false; // Allow further transitions
         }, 400);
+    } else if (currentScrollTop <= 50 && navbarContainer.classList.contains('sidebar') && !isTransitioning) {
+        // Scroll up (and not in transition)
+        isTransitioning = true; // Start transition
 
-    } else if (window.pageYOffset <= 50 && navbarContainer.classList.contains('sidebar')) {
         navbarContainer.classList.remove('sidebar');
 
         // Hide text during transition
         navbarList.style.visibility = 'hidden';
+        topButton.style.display = 'none';
 
         // Wait for vertical collapse to finish, then expand back
         setTimeout(() => {
             navbarContainer.classList.remove('sticky-left');
             navbar.classList.remove('sticky-left');
             loginButton.classList.remove('sticky-left');
+            registerButton.classList.remove('sticky-left');
             navbarList.style.visibility = 'visible'; // Reappear smoothly
+            isTransitioning = false; // Allow further transitions
         }, 400);
     }
+
+    // Update the last scroll position
+    lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; // Prevent negative scroll values
 };
+
+// Scroll to top when clicking the button
+document.addEventListener("DOMContentLoaded", function () {
+    var topButton = document.querySelector('.top-button');
+    
+    topButton.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Ensure the button is hidden initially
+    topButton.style.display = 'none';
+});
+
+document.querySelectorAll(".clickable-post").forEach(item => {
+    item.addEventListener("click", function() {
+        window.location.href = this.getAttribute("data-url");
+    });
+});

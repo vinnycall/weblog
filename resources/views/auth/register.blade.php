@@ -6,9 +6,7 @@
 
 @section('content')
 
-@include("partials.posts")
-@include("partials.posts")
-   
+@include('partials.auth.register')
     
 @endsection
 

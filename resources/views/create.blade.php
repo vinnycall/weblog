@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
    
 
@@ -6,8 +5,7 @@
 
 @section('content')
 
-@include("partials.posts")
-@include("partials.posts")
+@include("partials/create")
    
     
 @endsection

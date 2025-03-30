@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -20,5 +20,20 @@ class BlogController extends Controller
     {
         $post = Post::findOrFail($id);;
         return view('post', compact('post'));
+    }
+    public function store(Request $request){
+
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+    
+        Post::create([
+            'title' => $request->title,
+            'body' => $request->body,
+            'user_id'=> Auth::id(),
+        ]);
+    
+        return redirect()->route('myposts')->with('success', 'Post succesvol aangemaakt!');
     }
 }

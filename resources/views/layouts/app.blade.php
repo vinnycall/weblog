@@ -7,12 +7,13 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
+<div class="flex-grid">
+    <div class="header">@include("partials.header")</div>
+    <div class="nav">@include('partials.nav')</div>
+    <div class="content">@yield('content')</div>
+    <div class="footer">@include("partials.footer")</div>
 
-    @include('partials.nav')
-
-    <div class="container">
-        @yield('content')
-    </div>
+</div>
     <script src="{{ asset('js/navbar.js') }}"></script>
 </body>
 </html>

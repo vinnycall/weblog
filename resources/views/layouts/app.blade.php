@@ -8,6 +8,7 @@
 </head>
 <body>
 <div class="flex-grid">
+    <div class="border-right"></div>
     <div class="header">@include("partials.header")</div>
     <div class="nav">@include('partials.nav')</div>
     <div class="content">@yield('content')</div>

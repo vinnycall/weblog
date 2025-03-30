@@ -33,7 +33,12 @@ class BlogController extends Controller
             'body' => $request->body,
             'user_id'=> Auth::id(),
         ]);
-    
         return redirect()->route('myposts')->with('success', 'Post succesvol aangemaakt!');
+    }
+    public function myPosts(){
+        $user = Auth::user();
+        $posts = $user->posts;
+
+        return view('myposts', compact('posts'));
     }
 }

@@ -4,6 +4,9 @@
             <li><a href="{{ route('home') }}">Home</a></li>
             <li><a href="{{ route('about') }}">About</a></li>
             <li><a href="{{ route('create') }}">New Post</a></li>
+            <li><a href="{{ route('myposts') }}">My Posts</a></li>
+            <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+
 
         </ul>
         

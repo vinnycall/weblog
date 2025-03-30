@@ -21,7 +21,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/myposts', function() {    return view('myposts');})->name('myposts');
+Route::get('/myposts', [BlogController::class, 'myPosts'])->name('myposts')->middleware('auth');
 
 Route::get('/dashboard', function() {
     $user = Auth::user();

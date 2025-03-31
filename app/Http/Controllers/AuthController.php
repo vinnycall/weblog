@@ -17,6 +17,7 @@ public function showRegisterForm()
 }
 public function register(Request $request)
 {
+    // TODO :: validatie doen in Requests
     $request->validate([
         'name'=>'required|string|max:255',
         'email'=>'required|string|email|max:255|unique:users',
@@ -29,7 +30,7 @@ public function register(Request $request)
         'password' => Hash::make($request->password),
     ]);
 
-    return redirect()->route('login')->with('success', 'Registratie succesvol! Log nu in.');
+    return redirect()->route('login')->with('success', 'Registration complete! Please login.');
 }
 
 public function showLoginForm()
@@ -38,16 +39,27 @@ return view('auth.login');
 }
 public function login(Request $request)
 {
-    $credentials = $request->validate([
-        'email'=>'required|email',
-        'password'=>'required'
+    $loginField = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+
+    // TODO :: validatie doen in Requests
+    $request->validate([
+        'login' => 'required|string',
+        'password' => 'required|string',
     ]);
+
+    $credentials = [
+        $loginField => $request->input('login'),
+        'password'=>$request->input('password'),
+    ];
 
     if (Auth::attempt($credentials))
     {
-        return redirect()->route('dashboard')->with('success', 'Je bent ingelogd!');
+        return redirect()->route('dashboard')->with('success', 'You\'re now logged in!');
+        
     }
-    return back()->withErrors(['email' => 'Ongeldige inloggegevens']);
+    return back()->withErrors([
+        'login' => 'The username and/or password you entered is invalid',
+        ])->onlyInput('login');
 }
 
 public function logout()
@@ -59,3 +71,4 @@ public function logout()
 
 
 }
+

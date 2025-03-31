@@ -1,4 +1,8 @@
-
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
     <div class="dashboard">
     <h2>Welcome {{ $user->name }}!</h2>
     

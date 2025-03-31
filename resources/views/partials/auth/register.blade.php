@@ -1,5 +1,6 @@
 <div class="dashboard">
 <h1>Register</h1>
+
     <div class="form-container">
         <form action="{{ route('register') }}" method="POST">
             @csrf
@@ -28,8 +29,7 @@
         <strong><a href="{{ route('login') }}">Already have an account? Login here </a></strong>
         </form>
     </div>
-    <div>
-    </div>
+    
 </div>
 
 

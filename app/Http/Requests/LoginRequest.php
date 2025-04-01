@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class StorePostRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,15 +22,8 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|max:255',
-            'body' => 'required|max:255',
-            'user_id' => 'exists:users,id'
+            'login' => 'required|string',
+            'password' => 'required|string',
         ];
-    }
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'user_id' => Auth::id(), // Voeg automatisch de ingelogde gebruiker toe
-        ]);
     }
 }

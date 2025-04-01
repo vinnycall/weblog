@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -17,13 +19,6 @@ public function showRegisterForm()
 }
 public function register(Request $request)
 {
-    // TODO :: validatie doen in Requests
-    $request->validate([
-        'name'=>'required|string|max:255',
-        'email'=>'required|string|email|max:255|unique:users',
-        'password'=>'required|string|min:6|confirmed',
-    ]);
-
     User::create([
         'name' => $request->name,
         'email' => $request->email,
@@ -37,15 +32,9 @@ public function showLoginForm()
 {
 return view('auth.login');
 }
-public function login(Request $request)
+public function login(LoginRequest $request)
 {
     $loginField = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
-
-    // TODO :: validatie doen in Requests
-    $request->validate([
-        'login' => 'required|string',
-        'password' => 'required|string',
-    ]);
 
     $credentials = [
         $loginField => $request->input('login'),

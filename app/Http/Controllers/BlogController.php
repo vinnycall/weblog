@@ -25,7 +25,6 @@ class BlogController extends Controller
     public function store(StorePostRequest $request){
 
         $validated = $request->validated();
-
         Post::create($validated);
 
         return redirect()->route('myposts')->with('success', 'Post succesvol aangemaakt!');
@@ -42,7 +41,7 @@ class BlogController extends Controller
         
         $post->update($validated);        
 
-        return response()->route('myposts')->with(['success'=> 'Post updated']);
+        return redirect()->route('myposts')->with(['success'=> 'Post updated']);
     }
     public function destroy(Post $post){
         if($post){
@@ -58,4 +57,5 @@ class BlogController extends Controller
 
         return view('myposts', compact('posts'));
     }
+    
 }

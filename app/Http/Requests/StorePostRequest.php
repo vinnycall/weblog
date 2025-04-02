@@ -27,6 +27,9 @@ class StorePostRequest extends FormRequest
             'body' => 'required|max:255',
             'user_id' => 'exists:users,id',
             'category_id' => 'required|exists:categories,id',
+
+            'categories' => 'required|array|min:1',  // Ensure categories are selected
+        'categories.*' => 'exists:categories,id', // Ensure each category exists
         ];
    
     }

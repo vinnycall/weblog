@@ -17,13 +17,22 @@
 
         <div class="form-group">
             <label for="category">Category:</label>
-            <select name="category_id" id="category" required>
+<<<<<<< HEAD
+            <select name="categories[]" id="category" multiple required>
                 @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" >{{ $category->name }}</option>
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
             </select>
+=======
+            @foreach ($categories as $category)
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+>>>>>>> parent of 03df6ef (commit)
         </div>
+            <a href="{{route ('categories') }}">Add Category</a>
+
             <button type="submit">Create</button>
     </form>
 </div>
 </div>
+

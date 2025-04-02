@@ -3,7 +3,14 @@
             <div class="post-t" id="post-title-{{ $post->id }}"><h1>{{ $post->title }}</h1></div>
             <h3><em>{{ $post->user ? $post->user->name : "Unknown User" }}</em></h3>
             <div class="post-p" id="post-body-{{ $post->id }}">{{ $post->body }}</div>
-            
+    <ul>
+    <h2>Categories:<h2>
+       
+        @foreach($post->categories as $category)
+                    {{ $category->name }} |
+                @endforeach
+    </ul>
+
             @if(Auth::check() && Auth::id() === $post->user_id)
             <div class="auth-user">
                 <div class="buttons">

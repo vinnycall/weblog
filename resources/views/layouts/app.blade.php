@@ -17,6 +17,5 @@
 
 </div>
     <script src="{{ asset('js/navbar.js') }}"></script>
-    <script src="{{ asset('js/forms.js') }}"></script>
 </body>
 </html>

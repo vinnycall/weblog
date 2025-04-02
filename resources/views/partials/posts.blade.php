@@ -11,7 +11,7 @@
                 </div>
                 <div class="date-created">
                 @foreach($post->categories as $category)
-                    {{ $category->name }} |
+                    {{ $category->name }}
                 @endforeach
 
                 <h6>Date posted: {{ $post->created_at->format('d-m-Y') }}</h6>

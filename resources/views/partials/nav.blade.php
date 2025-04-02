@@ -6,6 +6,7 @@
             <li><a href="{{ route('post.create') }}">New Post</a></li>
             <li><a href="{{ route('myposts') }}">My Posts</a></li>
             <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ route('categories') }}">Categories</a></li>
 
 
         </ul>

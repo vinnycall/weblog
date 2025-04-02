@@ -28,8 +28,9 @@ class PostController extends Controller
 
         $validated = $request->validated();
         $validated['user_id'] = auth::id();
-        Post::create($validated);
-        $categories = Category::all();
+        $post = Post::create($validated);
+        $post->categories()->attach($validated['categories']);
+        
         return redirect()->route('myposts')->with('success', 'Post succesvol aangemaakt!');
         
     }

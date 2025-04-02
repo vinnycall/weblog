@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -22,13 +23,17 @@ Route::delete('/post/{post}', [PostController::class, 'destroy'])->middleware('a
 Route::get('/posts/create', [PostController::class, 'create'])->name('post.create');
 Route::post('/post/store', [PostController::class, 'store'])->name('post.store');   
 
-
 Route::post('/post/{post}/comment', [CommentController::class,'store'])->middleware('auth')->name('comment.store');
 Route::post('/comment/{post}/edit', [CommentController::class, 'edit'])->middleware('auth')->name('comment.edit');
 Route::post('/comment/{post}/update', [CommentController::class, 'update'])->middleware('auth')->name('comment.update');
 Route::delete('/comment/{post}/delete', [CommentController::class, 'destroy'])->middleware('auth')->name('comment.delete');
 
-Route::get('/categories', [PostController::class, 'categories'])->name('categories');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('category.show');
+Route::post('/categories/store', [CategoryController::class,'store'])->middleware('auth')->name('category.store');
+Route::post('/categories/{category}/edit', [CategoryController::class, 'edit'])->middleware('auth')->name('category.edit');
+Route::post('/categories/{category}/update', [CategoryController::class, 'update'])->middleware('auth')->name('category.update');
+Route::delete('/categories/{category}/delete', [CategoryController::class, 'destroy'])->middleware('auth')->name('category.delete');
 
 // TODO :: Controller functie voor maken
 Route::get('/about', function() {    return view('about');})->name('about');

@@ -2,19 +2,22 @@
     <h1>Create a new category</h1>
 
 <div class="form-container">
-    <form action="{{ route('post.store') }}" method="POST">
+    <form action="{{ route('category.store') }}" method="POST">
         @csrf
 
         <div class="form-group">
-            <label for="title">Title:</label>
-            <input type="text" name="title" placeholder="Post title">
-        </div>
-            
-        <div class="form-group">
-            <label for="body">Description:</label>
-            <textarea id="body" name="body" placeholder="Write your post here"></textarea>
+            <label for="name">Category name:</label>
+            <input type="text" name="name" placeholder="Category name">
         </div>
             <button type="submit">Create</button>
     </form>
 </div>
-</div>
+<h2>Category List:<h2>
+    <ul>
+        @foreach ($categories as $category)
+                <div id="post">
+                        <strong>{{$category->name}}</strong></a><br>
+                </div>
+        @endforeach 
+    </ul>
+    </div>

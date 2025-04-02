@@ -9,6 +9,14 @@
 
         <label for="body">Inhoud:</label>
         <textarea id="body" name="body" rows="5" required>{{ old('body', $post->body) }}</textarea>
+        <label for="category">Categorie:</label>
+        <select name="category_id" id="category" required>
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}" {{ $item->category_id == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }}
+                </option>
+            @endforeach
+        </select>
 
         <button type="submit">Opslaan</button>
     </form>

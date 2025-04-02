@@ -28,7 +28,7 @@ class CommentController extends Controller
     
         return view('edit-comment', compact('comment'));
     }
-    public function inlineUpdate(Request $request, $id){
+    public function Update(Request $request, $id){
         $comment = Comment::findOrFail($id);
         if (Auth::id() !== $comment->user_id) {
             return response()->json(['error'=> 'You do not have the persmission to delete this comment.'], 403);
@@ -42,7 +42,11 @@ class CommentController extends Controller
             'body' => $request->body,
         ]);
     
-        return response()->json(['success'=> 'Comment updated!']);
+        if (Auth::id() !== $comment->user_id) {
+            return back()->with('error', 'You do not have permission to edit this comment');
+        }
+    
+        return view('edit-comment', compact('comment'));
     }
     public function destroy($id) {
         $comment = Comment::findOrFail($id);

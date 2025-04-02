@@ -25,13 +25,9 @@ class StorePostRequest extends FormRequest
         return [
             'title' => 'required|max:255',
             'body' => 'required|max:255',
-            'user_id' => 'exists:users,id'
+            'user_id' => 'exists:users,id',
+            'category_id' => 'exists:categories,id',
         ];
-    }
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'user_id' => Auth::id(), // Voeg automatisch de ingelogde gebruiker toe
-        ]);
+   
     }
 }

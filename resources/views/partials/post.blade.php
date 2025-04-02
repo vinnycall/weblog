@@ -3,12 +3,24 @@
             <div class="post-t" id="post-title-{{ $post->id }}"><h1>{{ $post->title }}</h1></div>
             <h3><em>{{ $post->user ? $post->user->name : "Unknown User" }}</em></h3>
             <div class="post-p" id="post-body-{{ $post->id }}">{{ $post->body }}</div>
-
+            
+            @if(Auth::check() && Auth::id() === $post->user_id)
             <div class="auth-user">
                 <div class="buttons">
+                    <form action="{{ route('post.edit', $post->id) }}" method="GET" style="display:inline;">
+                    @csrf
+                    @method('EDIT')
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                    </form>
+
+                    <form action="{{ route('post.destroy', $post->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Verwijderen</button>
+                    </form>
                 </div>
             </div>
-
+            @endif
         </div>
         <div class="date-created">
             <p><em>{{ $post->created_at->format('d-m-Y') }}</em></p>
@@ -43,9 +55,9 @@
         <div class="auth-user">
         <div class="buttons">
         @if(Auth::check() && Auth::id() === $comment->user_id)
-            <button onclick="enableCommentEdit({{ $comment->id }})">Bewerken</button>
-            <button onclick="saveCommentEdit({{ $comment->id }})" id="save-comment-btn-{{ $comment->id }}">Opslaan</button>
-            <button onclick="deleteComment({{ $comment->id }})"id="delete-comment-btn-{{ $comment->id }}">Delete</button>
+            <button>Bewerken</button>
+            <button>Opslaan</button>
+            <button>Delete</button>
         @endif
         </div>
         </div>

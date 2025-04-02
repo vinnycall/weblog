@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Category;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\posts>
@@ -19,6 +20,7 @@ class PostFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             "body" => $this->faker->paragraph,
+            'category_id' => Category::inRandomOrder()->first()->id,
             
         ];
     }

@@ -1,5 +1,5 @@
 <div class="dashboard">
-    <h1>Create a new post</h1>
+    <h1>Create a new category</h1>
 
 <div class="form-container">
     <form action="{{ route('post.store') }}" method="POST">
@@ -13,13 +13,6 @@
         <div class="form-group">
             <label for="body">Description:</label>
             <textarea id="body" name="body" placeholder="Write your post here"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="category">Category:</label>
-            @foreach ($categories as $category)
-            <option value="{{ $category->id }}">{{ $category->name }}</option>
-            @endforeach
         </div>
             <button type="submit">Create</button>
     </form>

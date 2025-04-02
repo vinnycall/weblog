@@ -11,7 +11,19 @@
                 <div class="date-created">
                 <h6>Date posted: {{ $post->created_at->format('d-m-Y') }}</h6>
                 </div>
-                
+                <div class="buttons">
+                <form action="{{ route('post.edit', $post->id) }}" method="GET" style="display:inline;">
+                    @csrf
+                    @method('EDIT')
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                    </form>
+                    
+                <form action="{{ route('post.destroy', $post->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Verwijderen</button>
+                    </form>
+                </div>
             </li>
         @endforeach 
     </div>

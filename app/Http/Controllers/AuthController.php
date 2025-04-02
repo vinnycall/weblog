@@ -43,7 +43,7 @@ public function login(LoginRequest $request)
 
     if (Auth::attempt($credentials))
     {
-        return redirect()->route('dashboard')->with('success', 'You\'re now logged in!');
+        return redirect()->route('myposts')->with('success', 'You\'re now logged in!');
         
     }
     return back()->withErrors([

@@ -6,9 +6,6 @@
 
             <div class="auth-user">
                 <div class="buttons">
-                    <button onclick="enableEdit({{ $post->id }})">Bewerken</button>
-                    <button onclick="saveEdit({{ $post->id }})" style="display:none;" id="save-btn-{{ $post->id }}">Opslaan</button>
-                    <button onclick="deletePost({{ $post->id }})" style="display:none;" id="delete-btn-{{ $post->id }}">Delete</button>
                 </div>
             </div>
 
@@ -47,8 +44,8 @@
         <div class="buttons">
         @if(Auth::check() && Auth::id() === $comment->user_id)
             <button onclick="enableCommentEdit({{ $comment->id }})">Bewerken</button>
-            <button onclick="saveCommentEdit({{ $comment->id }})" style="display:none;" id="save-comment-btn-{{ $comment->id }}">Opslaan</button>
-            <button onclick="deleteComment({{ $comment->id }})" style="display:none;" id="delete-comment-btn-{{ $comment->id }}">Delete</button>
+            <button onclick="saveCommentEdit({{ $comment->id }})" id="save-comment-btn-{{ $comment->id }}">Opslaan</button>
+            <button onclick="deleteComment({{ $comment->id }})"id="delete-comment-btn-{{ $comment->id }}">Delete</button>
         @endif
         </div>
         </div>

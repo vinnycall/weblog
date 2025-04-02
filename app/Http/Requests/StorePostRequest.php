@@ -26,7 +26,7 @@ class StorePostRequest extends FormRequest
             'title' => 'required|max:255',
             'body' => 'required|max:255',
             'user_id' => 'exists:users,id',
-            'category_id' => 'exists:categories,id',
+            'category_id' => 'required|exists:categories,id',
         ];
    
     }

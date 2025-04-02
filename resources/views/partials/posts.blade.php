@@ -1,7 +1,4 @@
 
-
-
-
 <div class="load-posts">
     <div class="posts">
         @foreach ($posts as $post)
@@ -13,6 +10,10 @@
                         <div id="post-p">{{ \Illuminate\Support\Str::limit($post->body, 100, '...') }}</div>
                 </div>
                 <div class="date-created">
+                @foreach($post->categories as $category)
+                    {{ $category->name }}
+                @endforeach
+
                 <h6>Date posted: {{ $post->created_at->format('d-m-Y') }}</h6>
                 <!-- <a class="posts-button" href="{{ route('post.show', $post->id) }}"><h5>Read more</h5></a> -->
                 </div>

@@ -11,11 +11,11 @@ use App\Http\Requests\UpdatePostRequest;
 
 
 
-class BlogController extends Controller
+class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::orderBy("created_at", "desc")->get();
+        $posts = Post::with('categories')->orderBy("created_at", "desc")->get();
         return view('home', compact('posts'));
     }
 

@@ -1,16 +1,29 @@
 <div class="load-post">
         <div class="post">
             <div class="post-t" id="post-title-{{ $post->id }}"><h1>{{ $post->title }}</h1></div>
-            <h3><em>{{ $post->user ? $post->user->name : "Unknown User" }}</em></h3>
+            <h3><em>Posted by: {{ $post->user ? $post->user->name : "Unknown User" }}</em></h3>
+            <div> 
+                @if($image)
+                   <img src="{{ asset('uploads/' . $post->image_path) }}" alt="Uploaded Image">
+              </div>
+              @endif
             <div class="post-p" id="post-body-{{ $post->id }}">{{ $post->body }}</div>
     <ul>
-    <h2>Categories:<h2>
+        <h2>Categories:<h2>
        
         @foreach($post->categories as $category)
-                    {{ $category->name }} |
-                @endforeach
-    </ul>
+            {{ $category->name }} |
+        @endforeach
 
+        <div id="Is_premium">
+            @if($post->is_premium === 1)
+                <h3><strong>Premium = true</strong></h3>
+            @else
+                <h3><strong>Premium = false</strong></h3>
+            @endif
+        </div>
+        
+    </ul>
             @if(Auth::check() && Auth::id() === $post->user_id)
             <div class="auth-user">
                 <div class="buttons">

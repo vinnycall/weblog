@@ -20,8 +20,6 @@ class PostFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             "body" => $this->faker->paragraph,
-            'category_id' => Category::inRandomOrder()->first()->id,
-            
         ];
     }
 }

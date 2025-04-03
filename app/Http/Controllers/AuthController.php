@@ -27,7 +27,9 @@ public function register(Request $request)
 
     return redirect()->route('login')->with('success', 'Registration complete! Please login.');
 }
-
+public function premium(){
+    return view('premium');
+}
 public function showLoginForm()
 {
 return view('auth.login');

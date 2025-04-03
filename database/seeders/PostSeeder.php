@@ -32,7 +32,7 @@ class PostSeeder extends Seeder
             ]);
             $post->save();
             $post->categories()->attach(
-                $categories->random(rand(1, 3))->pluck('id')->toArray()
+            $categories->random(rand(1, 3))->pluck('id')->toArray()
             );
         }
        

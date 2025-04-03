@@ -19,6 +19,9 @@
     <div class="registerButton">
        <a href="{{ route('register') }}">Register</a></li>
     </div>
+    <div class="registerButton">
+       <a href="{{ route('premium') }}">Premium</a></li>
+    </div>
     <div class="top-button" id="myBtn" title="Go to top">
     <h1>↑</h1>
     </div>

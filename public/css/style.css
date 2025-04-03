@@ -92,6 +92,11 @@ a:active {
         background-color: #527752;
         box-shadow: 4 4px 8px rgba(0, 0, 0, 0.1);
 }
+.form-container img{
+    width: 100px;
+    height: 100px;
+
+}
 .form-group {
     display: flex;
     align-items: center;
@@ -140,6 +145,9 @@ a:active {
 .form-container button:hover {
     background-color: #FDCA00;
     
+}
+#premium{
+    color: gold;
 }
 .alert{
     color: rgb(255, 167, 167);

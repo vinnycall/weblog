@@ -5,7 +5,6 @@
 @endif
 <div class="dashboard">
     <h2>Welcome {{ $user->name }}!</h2>
-
     <p>Email: {{ $user->email }}</p>
     <p>Premium Status: {{ Auth::user()->is_premium ? 'Yes' : 'No' }}</p>
 

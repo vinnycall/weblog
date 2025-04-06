@@ -7,7 +7,7 @@
                 <select name="category" id="category" onchange="this.form.submit()">
                     <option value="">-- Select Category --</option>
                     @foreach ($categories as $category)
-                    <option value="{{ $category->id }}"
+                    <option value="{{ $category->id }}">
                         {{ request('category') == $category->id ? 'selected' : '' }}>
                         {{ $category->name }}
                     </option>
@@ -18,32 +18,30 @@
         </div>
 
         @foreach ($posts as $post)
-        <li class="clickable-post" data-url="{{ route('post.show', $post->id) }}">
-            <div id="post">
+            <li class="clickable-post" data-url="{{ route('post.show', $post->id) }}">
+                <div id="post">
+                    <a href="{{ route('post.show', $post->id) }}">
+                        <strong>{{$post->title}}</strong></a><br>
+                    <div id="Is_premium">
+                        @if($post->is_premium === 1)
+                        <div id="premium">
+                            <h6><strong>Premium Post</strong></h6>
+                        </div>
+                        @else
 
-                <a href="{{ route('post.show', $post->id) }}">
-                    <strong>{{$post->title}}</strong></a><br>
-                <div id="Is_premium">
-                    @if($post->is_premium === 1)
-                    <div id="premium">
-                        <h6><strong>Premium Post</strong></h6>
+                        @endif
                     </div>
-                    @else
-
-                    @endif
+                    <br>
+                    <div id="post-p">{{ \Illuminate\Support\Str::limit($post->body, 100, '...') }}</div>
                 </div>
-                <br>
-                <div id="post-p">{{ \Illuminate\Support\Str::limit($post->body, 100, '...') }}</div>
-            </div>
-            <div class="date-created">
-                @foreach($post->categories as $category)
-                {{ $category->name }}
-                @endforeach
+                <div class="date-created">
+                    @foreach($post->categories as $category)
+                    {{ $category->name }}
+                    @endforeach
 
-                <h6>Date posted: {{ $post->created_at->format('d-m-Y') }}</h6>
-            </div>
-
-        </li>
+                    <h6>Date posted: {{ $post->created_at->format('d-m-Y') }}</h6>
+                </div>
+            </li>
         @endforeach
     </div>
 </div>

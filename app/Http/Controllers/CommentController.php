@@ -58,8 +58,8 @@ class CommentController extends Controller
         if (Auth::id() !== $comment->user_id) {
             return redirect()->route('home')->with('error', 'You do not have the persmission to delete this comment.');
         }
-
         $comment->delete();
+        
         return back()->with('success', 'Comment deleted!');
     }
 }

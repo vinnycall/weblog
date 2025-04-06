@@ -1,5 +1,5 @@
 <div class="dashboard">
-<h1>Register</h1>
+    <h1>Register</h1>
 
     <div class="form-container">
         <form action="{{ route('register') }}" method="POST">
@@ -11,8 +11,8 @@
             </div>
 
             <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" name="email" placeholder="yourname@mail.com" required>
+                <label for="email">Email:</label>
+                <input type="email" name="email" placeholder="yourname@mail.com" required>
             </div>
 
             <div class="form-group">
@@ -26,11 +26,8 @@
             </div>
 
             <button type="submit">Register</button>
-        <strong><a href="{{ route('login') }}">Already have an account? Login here </a></strong>
+            <strong><a href="{{ route('login') }}">Already have an account? Login here </a></strong>
         </form>
     </div>
-    
+
 </div>
-
-
-

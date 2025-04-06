@@ -5,7 +5,6 @@
 
         <form action="{{ route('post.update', $post->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
-
             <div class="form-group">
                 <label for="title">Titel:</label>
                 <input type="text" id="title" name="title" value="{{ old('title', $post->title) }}" required>
@@ -29,10 +28,12 @@
                     @endforeach
                 </select>
             </div>
+
             <div class="form-group">
                 <label for="is_premium">Mark as premium:</label>
                 <input type="checkbox" name="is_premium" value="1"></input>
             </div>
+
             <a href="{{route ('categories') }}">Add Category</a>
             <button type="submit">Opslaan</button>
         </form>

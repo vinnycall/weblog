@@ -12,38 +12,37 @@
         <div class="post-p" id="post-body-{{ $post->id }}">{{ $post->body }}</div>
         <ul>
             <h2>Categories:<h2>
-
                     @foreach($post->categories as $category)
                     {{ $category->name }} |
                     @endforeach
 
-                    <div id="Is_premium">
-                        @if($post->is_premium === 1)
-                        <h3><strong>Premium = true</strong></h3>
-                        @else
-                        <h3><strong>Premium = false</strong></h3>
-                        @endif
-                    </div>
-
+            <div id="Is_premium">
+                @if($post->is_premium === 1)
+                <h3><strong>Premium = true</strong></h3>
+                @else
+                <h3><strong>Premium = false</strong></h3>
+                @endif
+            </div>
         </ul>
         @if(Auth::check() && Auth::id() === $post->user_id)
-        <div class="auth-user">
-            <div class="buttons">
-                <form action="{{ route('post.edit', $post->id) }}" method="GET" style="display:inline;">
-                    @csrf
-                    @method('EDIT')
-                    <button type="submit" class="btn btn-primary">Edit</button>
-                </form>
+            <div class="auth-user">
+                <div class="buttons">
+                    <form action="{{ route('post.edit', $post->id) }}" method="GET" style="display:inline;">
+                        @csrf
+                        @method('EDIT')
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </form>
 
-                <form action="{{ route('post.destroy', $post->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Verwijderen</button>
-                </form>
+                    <form action="{{ route('post.destroy', $post->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Verwijderen</button>
+                    </form>
+                </div>
             </div>
-        </div>
         @endif
     </div>
+    
     <div class="date-created">
         <p><em>{{ $post->created_at->format('d-m-Y') }}</em></p>
     </div>

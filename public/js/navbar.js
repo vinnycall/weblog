@@ -1,5 +1,5 @@
-let lastScrollTop = 0; // Variable to track last scroll position
-let isTransitioning = false; // To prevent multiple transitions at once
+let lastScrollTop = 0;
+let isTransitioning = false;
 
 window.onscroll = function () {
     var navbarContainer = document.querySelector(".navbar-container");
@@ -11,61 +11,51 @@ window.onscroll = function () {
 
     var currentScrollTop = window.pageYOffset;
 
-    // Check if scrolling down or up
     if (
         currentScrollTop > lastScrollTop &&
         !isTransitioning &&
         window.pageYOffset > 50 &&
         !navbarContainer.classList.contains("sidebar")
     ) {
-        // Scroll down
-        isTransitioning = true; // Start transition
+        isTransitioning = true;
 
         navbarContainer.classList.add("sticky-left");
         navbar.classList.add("sticky-left");
         loginButton.classList.add("sticky-left");
         registerButton.classList.add("sticky-left");
 
-        // Hide text immediately
         navbarList.style.visibility = "hidden";
 
-        // Wait for horizontal collapse to finish, then expand downward
         setTimeout(() => {
             navbarContainer.classList.add("sidebar");
-            navbarList.style.visibility = "visible"; // Reappear smoothly
+            navbarList.style.visibility = "visible";
             topButton.style.display = "flex";
-            isTransitioning = false; // Allow further transitions
+            isTransitioning = false;
         }, 400);
     } else if (
         currentScrollTop <= 50 &&
         navbarContainer.classList.contains("sidebar") &&
         !isTransitioning
     ) {
-        // Scroll up (and not in transition)
-        isTransitioning = true; // Start transition
+        isTransitioning = true;
 
         navbarContainer.classList.remove("sidebar");
 
-        // Hide text during transition
         navbarList.style.visibility = "hidden";
         topButton.style.display = "none";
 
-        // Wait for vertical collapse to finish, then expand back
         setTimeout(() => {
             navbarContainer.classList.remove("sticky-left");
             navbar.classList.remove("sticky-left");
             loginButton.classList.remove("sticky-left");
             registerButton.classList.remove("sticky-left");
-            navbarList.style.visibility = "visible"; // Reappear smoothly
-            isTransitioning = false; // Allow further transitions
+            navbarList.style.visibility = "visible";
+            isTransitioning = false;
         }, 400);
     }
-
-    // Update the last scroll position
-    lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; // Prevent negative scroll values
+    lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
 };
 
-// Scroll to top when clicking the button
 document.addEventListener("DOMContentLoaded", function () {
     var topButton = document.querySelector(".top-button");
 
@@ -73,7 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
         window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // Ensure the button is hidden initially
     topButton.style.display = "none";
 });
 

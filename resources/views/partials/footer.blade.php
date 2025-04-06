@@ -1,3 +1,3 @@
 <div class="footer-container">
-    <h1>FOOTER!</h1>
+    <h6>©2025 - Made by vincent</h6>
 </div>

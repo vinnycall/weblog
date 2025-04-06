@@ -14,10 +14,12 @@
                 <label for="body">Description:</label>
                 <textarea id="body" name="body" placeholder="Write your post here"></textarea>
             </div>
+
             <div class="form-group">
                 <label for="image">Upload Image:</label>
                 <input type="file" name="image" id="image">
             </div>
+
             <div class="form-group">
                 <label for="category">Category:</label>
                 <select name="categories[]" id="category" multiple required>
@@ -26,10 +28,12 @@
                     @endforeach
                 </select>
             </div>
+
             <div class="form-group">
                 <label for="is_premium">Mark as premium:</label>
                 <input type="checkbox" name="is_premium" value="1"></input>
             </div>
+
             <a href="{{route ('categories') }}">Add Category</a>
 
             <button type="submit">Create</button>

@@ -24,7 +24,6 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
         return redirect()->route('login')->with('success', 'Registration complete! Please login.');
     }
     public function premium()
@@ -51,10 +50,15 @@ class AuthController extends Controller
             'login' => 'The username and/or password you entered is invalid',
         ])->onlyInput('login');
     }
-
     public function logout()
     {
         Auth::logout();
         return redirect()->route('login')->with('success', 'Je bent uitgelogd!');
+    }
+    public function dashboard()
+    {
+        $user = Auth::user();
+        $username = request()->query('username');
+        return view('dashboard', compact('user', 'username'));
     }
 }

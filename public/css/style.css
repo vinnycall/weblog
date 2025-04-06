@@ -21,6 +21,7 @@ body {
     height: 60px;
     background-color: #222222;
     color: #fdca00;
+    text-align: left;
 }
 
 .footer-container {
@@ -29,7 +30,8 @@ body {
     height: 60px; /* Fixed height for footer */
     background-color: #333;
     color: white;
-    text-align: center;
+    text-align: left;
+    
 }
 a:link {
     color: #ffffff;

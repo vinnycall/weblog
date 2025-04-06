@@ -1,11 +1,11 @@
 @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
 @endif
-    <div class="dashboard">
+<div class="dashboard">
     <h2>Welcome {{ $user->name }}!</h2>
-    
+
     <p>Email: {{ $user->email }}</p>
     <p>Premium Status: {{ Auth::user()->is_premium ? 'Yes' : 'No' }}</p>
 
@@ -19,6 +19,5 @@
         <button type="submit">Logout</button>
     </form>
 
-    
-    </div>
-    
+
+</div>

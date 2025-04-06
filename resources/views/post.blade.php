@@ -1,5 +1,5 @@
 @extends('layouts.app')
-   
+
 
 @section('title', 'Home')
 
@@ -7,9 +7,7 @@
 @include("partials.post")
 
 
-    
-   
-    
-@endsection
 
-    
+
+
+@endsection

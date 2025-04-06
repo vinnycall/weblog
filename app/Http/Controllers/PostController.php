@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
@@ -17,19 +18,19 @@ class PostController extends Controller
     {
         $user = Auth::user();
         $categoryId = $request->input('category', null);
-        
+
         $posts = Post::with('categories')
-        ->when(!$user || !$user->is_premium, function ($query) {
-            return $query->where('is_premium', 0);
-        })
-        ->when($categoryId, function ($query) use ($categoryId) {
-            return $query->whereHas('categories', function ($query) use ($categoryId) {
-                $query->where('category_id', $categoryId);
-            });
-        })
-        ->orderBy("created_at", "desc")
-        ->get();
-       
+            ->when(!$user || !$user->is_premium, function ($query) {
+                return $query->where('is_premium', 0);
+            })
+            ->when($categoryId, function ($query) use ($categoryId) {
+                return $query->whereHas('categories', function ($query) use ($categoryId) {
+                    $query->where('category_id', $categoryId);
+                });
+            })
+            ->orderBy("created_at", "desc")
+            ->get();
+
 
         $categories = Category::all();
         return view('home', compact('posts', 'categories'));
@@ -38,21 +39,21 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $user = Auth::user();
-        
-        if($post->is_premium == 1){
-            if($user->is_premium == 1){
+
+        if ($post->is_premium == 1) {
+            if ($user->is_premium == 1) {
                 $image = $post->image_path;
                 return view('post', compact('post', 'image'));
-            } else{
+            } else {
                 return redirect()->route('premium')->with('error', 'Please subscribe to premium!');
             }
-        
-        }else{
+        } else {
             $image = $post->image_path;
             return view('post', compact('post', 'image'));
         }
     }
-    public function store(StorePostRequest $request){
+    public function store(StorePostRequest $request)
+    {
 
         $validated = $request->validated();
 
@@ -65,20 +66,23 @@ class PostController extends Controller
         }
         $post = Post::create($validated);
         $post->categories()->attach($validated['categories']);
-       
-        
+
+
         return redirect()->route('myposts')->with('success', 'Post succesvol aangemaakt!');
     }
-    public function create() {
+    public function create()
+    {
         $categories = Category::all();
         return view('create', compact('categories'));
     }
-    public function edit(Post $post){
+    public function edit(Post $post)
+    {
         $categories = Category::all();
 
         return view('edit', compact('post', 'categories'));
     }
-    public function update(UpdatePostRequest $request, Post $post){
+    public function update(UpdatePostRequest $request, Post $post)
+    {
         $validated = $request->validated();
         $validated['is_premium'] = $request->has('is_premium');
         if ($request->hasFile('image')) {
@@ -86,24 +90,23 @@ class PostController extends Controller
             $request->image->move(public_path('uploads'), $imageName);
             $validated['image_path'] = $imageName;
         }
-        $post->update($validated);        
+        $post->update($validated);
         $post->categories()->sync($validated['categories']);
-        return redirect()->route('myposts')->with(['success'=> 'Post updated']);
+        return redirect()->route('myposts')->with(['success' => 'Post updated']);
     }
-    public function destroy(Post $post){
-        if($post){
+    public function destroy(Post $post)
+    {
+        if ($post) {
             $post->delete();
-            return redirect()->route('myposts')->with('success','Post deleted');
+            return redirect()->route('myposts')->with('success', 'Post deleted');
         }
-        return redirect()->route('myposts')->with('error','Post not deleted');
-
+        return redirect()->route('myposts')->with('error', 'Post not deleted');
     }
-    public function myPosts(){
+    public function myPosts()
+    {
         $user = Auth::user();
         $posts = $user->posts;
 
         return view('myposts', compact('posts'));
     }
-  
-    
 }

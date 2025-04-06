@@ -13,7 +13,7 @@ class PostSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-   
+
     public function run(): void
     {
         $users = User::all();
@@ -23,19 +23,17 @@ class PostSeeder extends Seeder
             return;
         }
 
-        
-       
 
-        foreach(range(1,10) as $index) {
+
+
+        foreach (range(1, 10) as $index) {
             $post = Post::factory()->create([
                 "user_id" => $users->random()->id,
             ]);
             $post->save();
             $post->categories()->attach(
-            $categories->random(rand(1, 3))->pluck('id')->toArray()
+                $categories->random(rand(1, 3))->pluck('id')->toArray()
             );
         }
-       
-        
     }
 }

@@ -21,7 +21,7 @@ class CommentSeeder extends Seeder
         if ($posts->isEmpty() || $users->isEmpty()) {
             return; // Stop de seeder als er geen posts of users zijn
         }
-        foreach(range(1, 10) as $index) {
+        foreach (range(1, 10) as $index) {
             Comment::factory()->create(
                 [
                     'user_id' => $users->random()->id,

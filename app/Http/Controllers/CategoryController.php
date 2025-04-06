@@ -16,25 +16,19 @@ class CategoryController extends Controller
         $categories = Category::all();
         return view('categories', compact('categories'));
     }
-    public function show(Category $category){
+    public function show(Category $category)
+    {
         return view('category', compact('category'));
     }
-    public function store(CategoryRequest $request){
+    public function store(CategoryRequest $request)
+    {
         $validated = $request->validated();
         $validated['user_id'] = Auth::id();
         Category::create($validated);
 
         return redirect()->route('categories')->with('success', 'Category created successfully!');
-
     }
-    public function edit($id) {
-       
-    }
-    public function Update(Request $request, $id){
-       
-    }
-    public function destroy($id) {
-        
-    }
-    
+    public function edit($id) {}
+    public function Update(Request $request, $id) {}
+    public function destroy($id) {}
 }

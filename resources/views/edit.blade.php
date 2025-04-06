@@ -1,6 +1,5 @@
-
 @extends('layouts.app')
-   
+
 
 @section('title', 'Home')
 
@@ -8,8 +7,6 @@
 
 @include("partials.edit")
 
-   
-    
-@endsection
 
-    
+
+@endsection

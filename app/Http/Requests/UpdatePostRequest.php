@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+
 class UpdatePostRequest extends FormRequest
 {
     /**
@@ -26,8 +27,8 @@ class UpdatePostRequest extends FormRequest
             'title' => 'required|max:255',
             'body' => 'required|max:255',
             'categories' => 'required|array|min:1',
-            'categories.*' => 'exists:categories,id', 
-            'is_premium' =>'',
+            'categories.*' => 'exists:categories,id',
+            'is_premium' => '',
 
         ];
     }

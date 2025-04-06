@@ -13,15 +13,18 @@ class Post extends Model
     {
         return $this->belongsToMany(Category::class, 'post_category');
     }
-    public function comments(){
-     return $this->hasMany(Comment::class);   
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
-    public function user(){
-     return $this->belongsTo(User::class);   
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
-    public function images(){
+    public function images()
+    {
         return $this->belongsTo(Image::class);
     }
-    
-    protected $fillable =['user_id','title', 'body', 'image_path', 'is_premium'];
+
+    protected $fillable = ['user_id', 'title', 'body', 'image_path', 'is_premium'];
 }

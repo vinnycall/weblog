@@ -10,8 +10,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 
-
-
 class PostController extends Controller
 {
     public function index(Request $request)
@@ -31,7 +29,6 @@ class PostController extends Controller
             ->orderBy("created_at", "desc")
             ->get();
 
-
         $categories = Category::all();
         return view('home', compact('posts', 'categories'));
     }
@@ -43,6 +40,7 @@ class PostController extends Controller
         if ($post->is_premium == 1) {
             if ($user->is_premium == 1) {
                 $image = $post->image_path;
+                
                 return view('post', compact('post', 'image'));
             } else {
                 return redirect()->route('premium')->with('error', 'Please subscribe to premium!');
@@ -51,28 +49,33 @@ class PostController extends Controller
             $image = $post->image_path;
             return view('post', compact('post', 'image'));
         }
+        
     }
     public function store(StorePostRequest $request)
     {
-
         $validated = $request->validated();
 
         $validated['user_id'] = auth::id();
+
         $validated['is_premium'] = $request->has('is_premium');
+        
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
+        
             $request->image->move(public_path('uploads'), $imageName);
+        
             $validated['image_path'] = $imageName;
         }
         $post = Post::create($validated);
+        
         $post->categories()->attach($validated['categories']);
-
 
         return redirect()->route('myposts')->with('success', 'Post succesvol aangemaakt!');
     }
     public function create()
     {
         $categories = Category::all();
+
         return view('create', compact('categories'));
     }
     public function edit(Post $post)
@@ -81,23 +84,33 @@ class PostController extends Controller
 
         return view('edit', compact('post', 'categories'));
     }
+
+
     public function update(UpdatePostRequest $request, Post $post)
     {
         $validated = $request->validated();
+
         $validated['is_premium'] = $request->has('is_premium');
+        
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
+        
             $request->image->move(public_path('uploads'), $imageName);
+        
             $validated['image_path'] = $imageName;
         }
+        
         $post->update($validated);
+        
         $post->categories()->sync($validated['categories']);
+
         return redirect()->route('myposts')->with(['success' => 'Post updated']);
     }
     public function destroy(Post $post)
     {
         if ($post) {
             $post->delete();
+
             return redirect()->route('myposts')->with('success', 'Post deleted');
         }
         return redirect()->route('myposts')->with('error', 'Post not deleted');

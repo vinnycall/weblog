@@ -14,17 +14,22 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/post/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
     Route::post('/post/{post}/update', [PostController::class, 'update'])->name('post.update');
     Route::delete('/post/{post}', [PostController::class, 'destroy'])->name('post.destroy');
+
     Route::post('/post/{post}/comment', [CommentController::class, 'store'])->name('comment.store');
     Route::post('/comment/{post}/edit', [CommentController::class, 'edit'])->name('comment.edit');
     Route::post('/comment/{post}/update', [CommentController::class, 'update'])->name('comment.update');
     Route::delete('/comment/{post}/delete', [CommentController::class, 'destroy'])->name('comment.delete');
+    
     Route::post('/categories/store', [CategoryController::class, 'store'])->name('category.store');
     Route::post('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('category.edit');
     Route::post('/categories/{category}/update', [CategoryController::class, 'update'])->name('category.update');
     Route::delete('/categories/{category}/delete', [CategoryController::class, 'destroy'])->name('category.delete');
+    
     Route::post('toggle-premium', [UserController::class, 'enablePremium'])->name('toggle-premium');
     Route::post('disable-premium', [UserController::class, 'disablePremium'])->name('disable-premium');
+    
     Route::get('/myposts', [PostController::class, 'myPosts'])->name('myposts');
+    
     Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 });
 

@@ -19,13 +19,6 @@ class PostSeeder extends Seeder
         $users = User::all();
         $categories = Category::all();
 
-        if ($users->isEmpty() || $categories->isEmpty()) {
-            return;
-        }
-
-
-
-
         foreach (range(1, 10) as $index) {
             $post = Post::factory()->create([
                 "user_id" => $users->random()->id,

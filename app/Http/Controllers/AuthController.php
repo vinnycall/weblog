@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -19,11 +18,14 @@ class AuthController extends Controller
     }
     public function register(Request $request)
     {
+        // validatie middels requests
+
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
         return redirect()->route('login')->with('success', 'Registration complete! Please login.');
     }
     public function premium()
@@ -35,7 +37,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
     public function login(LoginRequest $request)
-    {
+    {        
         $loginField = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
 
         $credentials = [

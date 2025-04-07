@@ -29,7 +29,5 @@ class CategoryController extends Controller
 
         return redirect()->route('categories')->with('success', 'Category created successfully!');
     }
-    public function edit($id) {}
-    public function Update(Request $request, $id) {}
-    public function destroy($id) {}
+
 }

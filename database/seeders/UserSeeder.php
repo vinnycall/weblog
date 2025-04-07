@@ -14,5 +14,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::factory()->count(12)->create();
+
+        // ALTIJD een admin seede zodat je niet steeds opnieuw hoeft te registreren
     }
 }
